@@ -5,163 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Senora City Department of Justice</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #020617;
-      --panel: rgba(8, 14, 30, 0.96);
-      --panel-soft: rgba(15, 23, 42, 0.82);
-      --line: rgba(96, 165, 250, 0.22);
-      --line-strong: rgba(96, 165, 250, 0.5);
+      --bg1: #020617;
+      --bg2: #071227;
+      --panel: rgba(8, 14, 30, 0.94);
+      --panel-soft: rgba(10, 18, 36, 0.82);
+      --line: rgba(88, 133, 255, 0.18);
+      --line-strong: rgba(100, 149, 255, 0.38);
       --text: #eef4ff;
       --muted: #9fb2d9;
       --blue: #2563eb;
-      --blue-light: #60a5fa;
       --green: #22c55e;
       --yellow: #f59e0b;
       --red: #ef4444;
       --gray: #6b7280;
-      --shadow: 0 20px 70px rgba(0, 0, 0, 0.38);
     }
 
     body {
-      min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.2), transparent 30%),
-        radial-gradient(circle at top right, rgba(96, 165, 250, 0.12), transparent 26%),
-        linear-gradient(135deg, #020617 0%, #071227 50%, #030712 100%);
+        radial-gradient(circle at top left, rgba(59,130,246,0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(37,99,235,0.10), transparent 24%),
+        linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 48%, #030712 100%);
+      min-height: 100vh;
       overflow-x: hidden;
     }
 
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .app {
-      min-height: 100vh;
-    }
+    .hidden { display: none !important; }
 
     .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
       padding: 18px 28px;
       background: rgba(3, 8, 20, 0.88);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
+    .brand { display: flex; align-items: center; gap: 14px; }
     .logo {
       width: 48px;
       height: 48px;
       border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: rgba(37, 99, 235, 0.14);
-      border: 1px solid rgba(96, 165, 250, 0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(37,99,235,0.14);
+      border: 1px solid rgba(96,165,250,0.24);
       color: #cfe0ff;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 22px;
-      box-shadow: 0 0 28px rgba(59, 130, 246, 0.16);
+      box-shadow: 0 0 28px rgba(59,130,246,0.16);
     }
-
     .brand-mini {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.28em;
-      color: var(--muted);
+      color: #9fb2d9;
       margin-bottom: 4px;
     }
-
     .brand-title {
       font-size: 28px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: 0.08em;
     }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .container {
-      max-width: 1460px;
-      margin: 0 auto;
-      padding: 28px;
-    }
+    .topbar-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
     .btn {
       border: 1px solid var(--line);
-      background: rgba(12, 20, 40, 0.94);
+      background: rgba(12,20,40,0.94);
       color: #edf3ff;
       padding: 11px 16px;
       border-radius: 14px;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: .24s ease;
+      font-size: 14px;
     }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      background: rgba(25, 40, 75, 0.95);
-    }
-
-    .btn.primary {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      border-color: rgba(96, 165, 250, 0.35);
-    }
-
-    .btn.danger {
-      background: rgba(120, 29, 29, 0.95);
-      border-color: rgba(239, 68, 68, 0.28);
-    }
-
-    .btn.warn {
-      background: rgba(120, 82, 18, 0.96);
-      border-color: rgba(245, 158, 11, 0.28);
-    }
+    .btn:hover { transform: translateY(-2px); border-color: var(--line-strong); background: rgba(25,40,75,0.95); }
+    .btn.primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+    .btn.warn { background: rgba(120,82,18,0.96); }
+    .btn.danger { background: rgba(120,29,29,0.95); }
 
     .user-badge,
     .card,
     .row,
-    .stat-card,
-    .modal {
+    .profile-box,
+    .detail-block,
+    .search-box {
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(13, 22, 43, 0.96), rgba(8, 14, 28, 0.96));
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+      background: linear-gradient(180deg, rgba(13,22,43,0.96), rgba(8,14,28,0.96));
+      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
     }
 
-    .user-badge {
-      padding: 10px 14px;
-      border-radius: 14px;
-      color: #dbeafe;
-      font-size: 14px;
-    }
+    .user-badge { padding: 10px 14px; border-radius: 14px; font-size: 14px; color: #dbeafe; }
+    .container { max-width: 1460px; margin: 0 auto; padding: 28px; }
 
     .hero {
       display: flex;
@@ -171,34 +116,26 @@
       padding: 26px;
       border-radius: 28px;
       border: 1px solid var(--line);
-      background: rgba(7, 13, 28, 0.68);
-      box-shadow: var(--shadow);
+      background: rgba(7,13,28,0.68);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.34);
       margin-bottom: 26px;
+      backdrop-filter: blur(8px);
+      animation: fadeUp .4s ease;
     }
-
     .hero-pill {
       display: inline-block;
       margin-bottom: 12px;
       padding: 7px 12px;
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(37, 99, 235, 0.10);
+      background: rgba(37,99,235,0.10);
       color: #bdd7ff;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.18em;
     }
-
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 760px;
-      line-height: 1.55;
-    }
+    .hero h1 { font-size: 40px; margin-bottom: 10px; }
+    .hero p { color: var(--muted); max-width: 760px; line-height: 1.55; }
 
     .stats {
       display: grid;
@@ -206,56 +143,25 @@
       gap: 12px;
       min-width: 470px;
     }
+    .stat-card { padding: 16px; border-radius: 18px; transition: .24s ease; }
+    .stat-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+    .stat-title { font-size: 12px; color: #a8bce4; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 6px; }
+    .stat-value { font-size: 24px; font-weight: 700; }
 
-    .stat-card {
-      padding: 16px;
-      border-radius: 18px;
-    }
-
-    .stat-title {
-      font-size: 12px;
-      color: #a8bce4;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .stat-value {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
     .tab-btn {
       border: 1px solid var(--line);
-      background: rgba(10, 17, 36, 0.92);
+      background: rgba(10,17,36,0.92);
       color: #cfe0ff;
       padding: 12px 18px;
       border-radius: 14px;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: .24s ease;
     }
+    .tab-btn.active, .tab-btn:hover { border-color: var(--line-strong); background: rgba(37,99,235,0.16); transform: translateY(-2px); }
 
-    .tab-btn.active,
-    .tab-btn:hover {
-      border-color: var(--line-strong);
-      background: rgba(37, 99, 235, 0.16);
-      transform: translateY(-2px);
-    }
-
-    .section-view {
-      display: none;
-    }
-
-    .section-view.active {
-      display: block;
-    }
+    .section-view { display: none; }
+    .section-view.active { display: block; animation: fadeUp .25s ease; }
 
     .section-head {
       display: flex;
@@ -265,43 +171,49 @@
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
+    .section-head h2 { font-size: 28px; margin-bottom: 5px; }
+    .section-head p { color: var(--muted); }
+    .search-box { min-width: 240px; padding: 13px 16px; border-radius: 16px; color: #7f96c5; }
 
-    .section-head h2 {
-      font-size: 28px;
-      margin-bottom: 5px;
-    }
-
-    .section-head p {
-      color: var(--muted);
-    }
-
-    .card {
+    .panel, .rank-section {
       padding: 22px;
       border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(5,10,22,0.60);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
       margin-bottom: 22px;
+      backdrop-filter: blur(8px);
     }
 
-    .card-head {
+    .panel-head, .rank-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
       padding-bottom: 14px;
-      border-bottom: 1px solid rgba(85, 130, 255, 0.12);
+      border-bottom: 1px solid rgba(85,130,255,0.12);
       margin-bottom: 16px;
     }
-
-    .card-title {
-      font-size: 25px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+    .rank-left { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .badge {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border-radius: 12px;
+      padding: 8px 13px;
+      font-weight: 700;
+      font-size: 14px;
     }
-
-    .row-list {
-      display: grid;
-      gap: 14px;
+    .heading { font-size: 27px; font-weight: 700; letter-spacing: .06em; }
+    .count-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(37,99,235,0.10);
+      color: #bed7ff;
+      font-size: 13px;
     }
+    .list { display: grid; gap: 14px; }
 
     .row {
       display: flex;
@@ -311,82 +223,40 @@
       flex-wrap: wrap;
       padding: 18px 20px;
       border-radius: 18px;
+      transition: .24s ease;
       cursor: pointer;
-      transition: 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
-
-    .row:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-    }
-
-    .row-title {
-      font-size: 21px;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .row-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .row-side {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
+    .row:hover { transform: translateY(-4px) scale(1.005); border-color: var(--line-strong); }
+    .main { min-width: 260px; }
+    .name { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .side { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
     .tag {
       padding: 8px 11px;
       border-radius: 10px;
       font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+      letter-spacing: .05em;
+      border: 1px solid rgba(255,255,255,.08);
     }
-
-    .tag.green {
-      color: #9ef0a9;
-      background: rgba(34, 197, 94, 0.12);
-      border-color: rgba(34, 197, 94, 0.15);
-    }
-
-    .tag.blue {
-      color: #c3ddff;
-      background: rgba(37, 99, 235, 0.12);
-      border-color: rgba(59, 130, 246, 0.15);
-    }
-
-    .tag.yellow {
-      color: #fde68a;
-      background: rgba(245, 158, 11, 0.12);
-      border-color: rgba(245, 158, 11, 0.18);
-    }
-
-    .tag.gray {
-      color: #d1d5db;
-      background: rgba(75, 85, 99, 0.16);
-      border-color: rgba(107, 114, 128, 0.2);
-    }
+    .tag.green { color: #9ef0a9; background: rgba(34,197,94,.12); }
+    .tag.blue { color: #c3ddff; background: rgba(37,99,235,.12); }
+    .tag.yellow { color: #fde68a; background: rgba(245,158,11,.12); }
+    .tag.gray { color: #d1d5db; background: rgba(75,85,99,.16); }
 
     .overlay {
       position: fixed;
       inset: 0;
-      z-index: 1000;
+      background: rgba(1,4,12,.97);
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1000;
       padding: 20px;
-      background: rgba(1, 4, 12, 0.97);
       overflow-y: auto;
     }
-
     .modal {
       width: 100%;
       max-width: 620px;
@@ -394,1317 +264,727 @@
       display: flex;
       flex-direction: column;
       border-radius: 26px;
-      background: rgba(4, 9, 21, 0.98);
+      border: 1px solid var(--line);
+      background: rgba(4,9,21,0.98);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.45);
       overflow: hidden;
+      animation: popIn .25s ease;
     }
-
-    .modal.large {
-      max-width: 820px;
-    }
-
-    .modal.xlarge {
-      max-width: 980px;
-    }
-
+    .modal.large { max-width: 780px; }
+    .modal.xlarge { max-width: 980px; }
     .modal-head {
       padding: 24px 28px;
-      border-bottom: 1px solid rgba(85, 130, 255, 0.12);
+      border-bottom: 1px solid rgba(85,130,255,.12);
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
     }
+    .modal-title { font-size: 18px; color: #cfe0ff; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+    .close-btn { border: none; background: transparent; color: #93a8d4; cursor: pointer; font-size: 28px; line-height: 1; }
+    .modal-body { padding: 24px 28px 28px; overflow-y: auto; }
 
-    .modal-title {
-      font-size: 18px;
-      color: #cfe0ff;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    .modal-body {
-      padding: 24px 28px 28px;
-      overflow-y: auto;
-    }
-
-    .close-btn {
-      border: none;
-      background: transparent;
-      color: #93a8d4;
-      cursor: pointer;
-      font-size: 30px;
-      line-height: 1;
-    }
-
-    .form {
-      display: grid;
-      gap: 18px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-
-    .field label {
-      color: #adbfe3;
-      font-size: 14px;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
+    .form { display: grid; gap: 18px; }
+    .field { display: grid; gap: 8px; }
+    .field label { color: #adbfe3; font-size: 14px; }
+    .field input, .field select, .field textarea {
       width: 100%;
-      border: 1px solid rgba(85, 130, 255, 0.18);
-      background: rgba(2, 7, 18, 0.98);
+      border: 1px solid rgba(85,130,255,.18);
+      background: rgba(2,7,18,.98);
       color: white;
       border-radius: 14px;
       padding: 14px 15px;
       font-size: 15px;
       outline: none;
+      transition: .2s ease;
       resize: vertical;
       min-height: 48px;
     }
-
-    .field textarea {
-      min-height: 120px;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: rgba(96, 165, 250, 0.46);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
-    }
-
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .info-box,
-    .error-box,
-    .preview-box,
-    .detail-block {
-      padding: 14px 16px;
+    .field textarea { min-height: 120px; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: rgba(96,165,250,.46); box-shadow: 0 0 0 3px rgba(59,130,246,.10); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .profile-box { padding: 16px; border-radius: 16px; }
+    .profile-label { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: #9fb2d9; margin-bottom: 8px; }
+    .profile-value { font-size: 20px; font-weight: 700; color: #eef4ff; word-break: break-word; }
+    .section-split { margin-top: 18px; margin-bottom: 18px; padding-top: 16px; border-top: 1px solid rgba(85,130,255,.12); }
+    .section-split h4 { color: #f16464; text-transform: uppercase; letter-spacing: .14em; font-size: 16px; margin-bottom: 12px; }
+    .row-actions, .modal-actions, .detail-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .modal-actions, .detail-actions { justify-content: flex-end; margin-top: 8px; }
+    .error-box, .info-box, .judge-box {
+      padding: 12px 14px;
       border-radius: 14px;
-      line-height: 1.55;
+      font-size: 14px;
+      line-height: 1.45;
     }
-
-    .info-box {
-      color: #bed7ff;
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(37, 99, 235, 0.18);
-    }
-
-    .error-box {
-      color: #ffc4c4;
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.18);
-    }
-
-    .preview-box,
-    .detail-block {
-      color: #edf3ff;
-      background: rgba(9, 16, 32, 0.96);
-      border: 1px solid rgba(85, 130, 255, 0.12);
+    .error-box { color: #ffc4c4; background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.18); }
+    .info-box { color: #bed7ff; background: rgba(37,99,235,.12); border: 1px solid rgba(37,99,235,.18); }
+    .judge-box { color: #dbeafe; background: rgba(17,24,39,.9); border: 1px solid rgba(96,165,250,.16); }
+    .detail-block { padding: 18px; border-radius: 18px; margin-bottom: 14px; }
+    .detail-block h4 { font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: #a9c3f3; margin-bottom: 8px; }
+    .detail-block p { color: #edf3ff; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+    .preview-box {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(9,16,32,.96);
+      border: 1px solid rgba(85,130,255,.12);
       white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .detail-block {
-      margin-bottom: 14px;
-    }
-
-    .detail-block h4 {
+      color: #edf3ff;
+      line-height: 1.7;
       font-size: 15px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #a9c3f3;
-      margin-bottom: 8px;
     }
 
-    .section-split {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(85, 130, 255, 0.12);
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes popIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
 
-    .section-split h4 {
-      color: #f87171;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-
-    .tiny {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    @media (max-width: 1050px) {
-      .stats {
-        grid-template-columns: repeat(2, minmax(130px, 1fr));
-        min-width: 100%;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .topbar,
-      .container,
-      .modal-head,
-      .modal-body {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .brand-title {
-        font-size: 22px;
-      }
-
-      .hero h1 {
-        font-size: 26px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-    }
+    @media (max-width: 1050px) { .stats { grid-template-columns: repeat(2, minmax(130px, 1fr)); min-width: 100%; } }
+    @media (max-width: 900px) { .hero h1 { font-size: 32px; } .heading, .name { font-size: 22px; } .grid-2, .profile-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .topbar, .container, .modal-head, .modal-body { padding-left: 16px; padding-right: 16px; } .topbar { flex-direction: column; align-items: flex-start; } .brand-title { font-size: 22px; } .hero h1 { font-size: 26px; } .name { font-size: 18px; } .stats { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div id="loginOverlay" class="overlay">
     <div class="modal">
-      <div class="modal-head">
-        <div class="modal-title">Login</div>
-      </div>
+      <div class="modal-head"><div class="modal-title">Login</div></div>
       <div class="modal-body">
         <form id="loginForm" class="form">
-          <div class="info-box">
-            Test-Login:<br />
-            Benutzername: <b>owner</b><br />
-            Passwort: <b>1111</b>
-          </div>
-          <div class="field">
-            <label for="loginUsername">Benutzername</label>
-            <input id="loginUsername" type="text" autocomplete="username" placeholder="owner" required />
-          </div>
-          <div class="field">
-            <label for="loginPassword">Passwort</label>
-            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="1111" required />
-          </div>
+          <div class="info-box">Owner Login zum Testen:<br>Benutzername: <b>owner</b><br>Passwort: <b>1111</b></div>
+          <div class="field"><label for="loginUsername">Benutzername</label><input id="loginUsername" type="text" required /></div>
+          <div class="field"><label for="loginPassword">Passwort</label><input id="loginPassword" type="password" required /></div>
           <div id="loginError" class="error-box hidden"></div>
-          <div class="actions">
-            <button type="submit" class="btn primary">Einloggen</button>
-          </div>
+          <div class="modal-actions"><button type="submit" class="btn primary">Einloggen</button></div>
         </form>
       </div>
     </div>
   </div>
 
-  <div id="memberModal" class="overlay hidden">
-    <div class="modal large">
-      <div class="modal-head">
-        <div class="modal-title">Mitglied hinzufügen</div>
-        <button id="closeMemberModal" class="close-btn" type="button">×</button>
-      </div>
-      <div class="modal-body">
-        <form id="memberForm" class="form">
-          <div class="grid-2">
-            <div class="field">
-              <label for="memberRank">Rang</label>
-              <select id="memberRank" required></select>
-            </div>
-            <div class="field">
-              <label for="memberStatus">Status</label>
-              <select id="memberStatus" required>
-                <option value="AKTIV">AKTIV</option>
-                <option value="INAKTIV">INAKTIV</option>
-                <option value="ABGEMELDET">ABGEMELDET</option>
-              </select>
-            </div>
-          </div>
-          <div class="grid-2">
-            <div class="field">
-              <label for="memberName">IC Name</label>
-              <input id="memberName" type="text" required />
-            </div>
-            <div class="field">
-              <label for="memberUsername">Login Benutzername</label>
-              <input id="memberUsername" type="text" required />
-            </div>
-          </div>
-          <div class="grid-2">
-            <div class="field">
-              <label for="memberPassword">Login Passwort</label>
-              <input id="memberPassword" type="text" required />
-            </div>
-            <div class="field">
-              <label for="memberDiscordName">Discord Name</label>
-              <input id="memberDiscordName" type="text" required />
-            </div>
-          </div>
-          <div class="field">
-            <label for="memberDiscordId">Discord ID</label>
-            <input id="memberDiscordId" type="text" required />
-          </div>
-          <div id="memberError" class="error-box hidden"></div>
-          <div class="actions">
-            <button id="cancelMemberModal" type="button" class="btn">Abbrechen</button>
-            <button type="submit" class="btn primary">Hinzufügen</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <div id="memberModal" class="overlay hidden"><div class="modal large"><div class="modal-head"><div class="modal-title">Mitglied hinzufügen</div><button id="closeMemberModal" class="close-btn" type="button">×</button></div><div class="modal-body"><form id="memberForm" class="form"><div class="grid-2"><div class="field"><label for="memberRank">Rang</label><select id="memberRank" required></select></div><div class="field"><label for="memberStatus">Status</label><select id="memberStatus" required><option value="AKTIV">AKTIV</option><option value="INAKTIV">INAKTIV</option><option value="ABGEMELDET">ABGEMELDET</option></select></div></div><div class="grid-2"><div class="field"><label for="memberName">IC Name</label><input id="memberName" type="text" required /></div><div class="field"><label for="memberUsername">Login Benutzername</label><input id="memberUsername" type="text" required /></div></div><div class="grid-2"><div class="field"><label for="memberPassword">Login Passwort</label><input id="memberPassword" type="text" required /></div><div class="field"><label for="memberDiscordName">Discord Name</label><input id="memberDiscordName" type="text" required /></div></div><div class="field"><label for="memberDiscordId">Discord ID</label><input id="memberDiscordId" type="text" required /></div><div id="memberError" class="error-box hidden"></div><div class="modal-actions"><button id="cancelMemberModal" type="button" class="btn">Abbrechen</button><button type="submit" class="btn primary">Hinzufügen</button></div></form></div></div></div>
 
-  <div id="termModal" class="overlay hidden">
-    <div class="modal large">
-      <div class="modal-head">
-        <div class="modal-title">Gerichtstermin</div>
-        <button id="closeTermModal" class="close-btn" type="button">×</button>
-      </div>
-      <div class="modal-body">
-        <form id="termForm" class="form">
-          <div class="grid-2">
-            <div class="field">
-              <label for="termDate">Datum</label>
-              <input id="termDate" type="date" required />
-            </div>
-            <div class="field">
-              <label for="termJudge">Führender Richter</label>
-              <input id="termJudge" type="text" required />
-            </div>
-          </div>
-          <div class="field">
-            <label for="termTitle">Überschrift</label>
-            <input id="termTitle" type="text" required />
-          </div>
-          <div class="field">
-            <label for="termDescription">Beschreibung</label>
-            <textarea id="termDescription" required></textarea>
-          </div>
-          <div class="field">
-            <label for="termParticipants">Mitglieder</label>
-            <textarea id="termParticipants"></textarea>
-          </div>
-          <div id="termError" class="error-box hidden"></div>
-          <div class="actions">
-            <button id="cancelTermModal" type="button" class="btn">Abbrechen</button>
-            <button type="submit" class="btn primary">Speichern</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <div id="memberDetailModal" class="overlay hidden"><div class="modal xlarge"><div class="modal-head"><div class="modal-title">Mitglied</div><button id="closeMemberDetailModal" class="close-btn" type="button">×</button></div><div class="modal-body"><div id="memberDetailContent"></div></div></div></div>
+  <div id="settingsModal" class="overlay hidden"><div class="modal large"><div class="modal-head"><div class="modal-title">Webhook Einstellungen</div><button id="closeSettingsModal" class="close-btn" type="button">×</button></div><div class="modal-body"><form id="webhookForm" class="form"><div class="field"><label for="aktenWebhook">Webhook URL für Akten</label><input id="aktenWebhook" type="text" /></div><div class="field"><label for="registraturenWebhook">Webhook URL für Registraturen</label><input id="registraturenWebhook" type="text" /></div><div class="field"><label for="urteileWebhook">Webhook URL für Gerichtsurteile</label><input id="urteileWebhook" type="text" /></div><div class="modal-actions"><button id="cancelSettingsModal" type="button" class="btn">Schließen</button><button type="submit" class="btn primary">Speichern</button></div></form></div></div></div>
+  <div id="termModal" class="overlay hidden"><div class="modal xlarge"><div class="modal-head"><div class="modal-title">Gerichtstermin eintragen</div><button id="closeTermModal" class="close-btn" type="button">×</button></div><div class="modal-body"><form id="termForm" class="form"><div class="grid-2"><div class="field"><label for="termDate">Datum</label><input id="termDate" type="date" required /></div><div class="field"><label for="termJudge">Führender Richter</label><input id="termJudge" type="text" required /></div></div><div class="field"><label for="termTitle">Überschrift</label><input id="termTitle" type="text" required /></div><div class="field"><label for="termDescription">Beschreibung</label><textarea id="termDescription" required></textarea></div><div class="field"><label for="termParticipants">Mitglieder</label><textarea id="termParticipants"></textarea></div><div class="field"><label for="termMentionIds">Discord IDs zum Erwähnen</label><textarea id="termMentionIds"></textarea></div><div id="termError" class="error-box hidden"></div><div class="modal-actions"><button id="cancelTermModal" type="button" class="btn">Abbrechen</button><button type="submit" class="btn primary">Eintrag erstellen</button></div></form></div></div></div>
+  <div id="termDetailModal" class="overlay hidden"><div class="modal xlarge"><div class="modal-head"><div class="modal-title">Gerichtstermin</div><button id="closeTermDetailModal" class="close-btn" type="button">×</button></div><div class="modal-body"><div id="termDetailContent"></div><div class="detail-actions"><button id="announceJudgmentButton" type="button" class="btn primary">Gerichtsurteil verkünden</button><button id="closeSelectedTermButton" type="button" class="btn danger">Als geschlossen markieren</button></div></div></div></div>
+  <div id="judgmentModal" class="overlay hidden"><div class="modal xlarge"><div class="modal-head"><div class="modal-title">Gerichtsurteil verkünden</div><button id="closeJudgmentModal" class="close-btn" type="button">×</button></div><div class="modal-body"><form id="judgmentForm" class="form"><div class="grid-2"><div class="field"><label for="judgmentCaseNumber">Aktenzeichen</label><input id="judgmentCaseNumber" type="text" /></div><div class="field"><label for="judgmentTitle">Titel</label><input id="judgmentTitle" type="text" /></div></div><div class="field"><label for="judgmentFacts">Sachverhalt</label><textarea id="judgmentFacts"></textarea></div><div class="field"><label for="judgmentConclusion">Fazit</label><textarea id="judgmentConclusion"></textarea></div><div class="grid-2"><div class="field"><label for="judgmentDecisionBy">Entschieden durch</label><input id="judgmentDecisionBy" type="text" /></div><div class="field"><label for="judgmentDocsLink">Google Docs Link</label><input id="judgmentDocsLink" type="text" /></div></div><div class="field"><label>Vorschau</label><div id="judgmentPreview" class="preview-box"></div></div><div class="modal-actions"><button id="cancelJudgmentModal" type="button" class="btn">Abbrechen</button><button type="submit" class="btn primary">Speichern</button></div></form></div></div></div>
+  <div id="registryModal" class="overlay hidden"><div class="modal xlarge"><div class="modal-head"><div class="modal-title">Registratur erstellen</div><button id="closeRegistryModal" class="close-btn" type="button">×</button></div><div class="modal-body"><form id="registryForm" class="form"><div class="grid-2"><div class="field"><label for="registryCaseNumber">Aktenzeichen</label><input id="registryCaseNumber" type="text" required /></div><div class="field"><label for="registryProcedure">Verfahren</label><input id="registryProcedure" type="text" required /></div></div><div class="grid-2"><div class="field"><label for="registryTitle">Titel</label><input id="registryTitle" type="text" required /></div><div class="field"><label for="registryDocsLink">Google Docs Link</label><input id="registryDocsLink" type="text" /></div></div><div class="grid-2"><div class="field"><label for="registryTemplate">Vorlagen</label><select id="registryTemplate"></select></div><div class="field"><label>&nbsp;</label><button id="applyRegistryTemplateButton" type="button" class="btn">Vorlage übernehmen</button></div></div><div class="field"><label for="registryBody">Inhalt</label><textarea id="registryBody" required></textarea></div><div class="field"><label for="registryMentionIds">Discord IDs zum Erwähnen</label><textarea id="registryMentionIds"></textarea></div><div class="field"><label>Vorschau</label><div id="registryPreview" class="preview-box"></div></div><div id="registryError" class="error-box hidden"></div><div class="modal-actions"><button id="cancelRegistryModal" type="button" class="btn">Abbrechen</button><button type="submit" class="btn primary">Speichern</button></div></form></div></div></div>
+  <div id="registryDetailModal" class="overlay hidden"><div class="modal xlarge"><div class="modal-head"><div class="modal-title">Registratur</div><button id="closeRegistryDetailModal" class="close-btn" type="button">×</button></div><div class="modal-body"><div id="registryDetailContent"></div><div class="detail-actions"><button id="editRegistryButton" type="button" class="btn primary">Bearbeiten</button></div></div></div></div>
 
-  <div id="registryModal" class="overlay hidden">
-    <div class="modal xlarge">
-      <div class="modal-head">
-        <div class="modal-title">Registratur</div>
-        <button id="closeRegistryModal" class="close-btn" type="button">×</button>
-      </div>
-      <div class="modal-body">
-        <form id="registryForm" class="form">
-          <div class="grid-2">
-            <div class="field">
-              <label for="registryCaseNumber">Aktenzeichen</label>
-              <input id="registryCaseNumber" type="text" required />
-            </div>
-            <div class="field">
-              <label for="registryProcedure">Verfahren</label>
-              <input id="registryProcedure" type="text" required />
-            </div>
-          </div>
-          <div class="grid-2">
-            <div class="field">
-              <label for="registryTitle">Titel</label>
-              <input id="registryTitle" type="text" required />
-            </div>
-            <div class="field">
-              <label for="registryDocsLink">Google Docs Link</label>
-              <input id="registryDocsLink" type="text" />
-            </div>
-          </div>
-          <div class="field">
-            <label for="registryTemplate">Vorlage</label>
-            <select id="registryTemplate"></select>
-          </div>
-          <button id="applyRegistryTemplateButton" type="button" class="btn">Vorlage übernehmen</button>
-          <div class="field">
-            <label for="registryBody">Inhalt</label>
-            <textarea id="registryBody" required></textarea>
-          </div>
-          <div class="field">
-            <label>Vorschau</label>
-            <div id="registryPreview" class="preview-box"></div>
-          </div>
-          <div id="registryError" class="error-box hidden"></div>
-          <div class="actions">
-            <button id="cancelRegistryModal" type="button" class="btn">Abbrechen</button>
-            <button type="submit" class="btn primary">Speichern</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="detailModal" class="overlay hidden">
-    <div class="modal xlarge">
-      <div class="modal-head">
-        <div id="detailTitle" class="modal-title">Details</div>
-        <button id="closeDetailModal" class="close-btn" type="button">×</button>
-      </div>
-      <div class="modal-body">
-        <div id="detailContent"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="app" class="app hidden">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo">D</div>
-        <div>
-          <div class="brand-mini">Senora City</div>
-          <div class="brand-title">Department of Justice</div>
-        </div>
-      </div>
-      <div class="topbar-right">
-        <div id="currentUserBadge" class="user-badge"></div>
-        <button id="addMemberButton" class="btn primary hidden" type="button">Mitglied hinzufügen</button>
-        <button id="createTermButton" class="btn" type="button">Gerichtstermin</button>
-        <button id="createRegistryButton" class="btn" type="button">Registratur</button>
-        <button id="resetDataButton" class="btn danger hidden" type="button">Daten zurücksetzen</button>
-        <button id="logoutButton" class="btn" type="button">Logout</button>
-      </div>
-    </header>
-
+  <div id="app" class="hidden">
+    <header class="topbar"><div class="brand"><div class="logo">D</div><div><div class="brand-mini">Senora City</div><div class="brand-title">Department of Justice</div></div></div><div class="topbar-right"><div id="currentUserBadge" class="user-badge"></div><button id="settingsButton" class="btn hidden" type="button">Einstellungen</button><button id="addMemberButton" class="btn primary hidden" type="button">Mitglied hinzufügen</button><button id="createTermButton" class="btn" type="button">Gerichtstermin</button><button id="logoutButton" class="btn" type="button">Logout</button></div></header>
     <main class="container">
-      <section class="hero">
-        <div>
-          <div class="hero-pill">Department Overview</div>
-          <h1>Department of Justice</h1>
-          <p>Interne Übersicht des staatlichen DOJ von Senora City.</p>
-        </div>
-        <div class="stats">
-          <div class="stat-card"><div class="stat-title">Mitglieder</div><div id="statMembers" class="stat-value">00</div></div>
-          <div class="stat-card"><div class="stat-title">Ränge</div><div id="statRanks" class="stat-value">00</div></div>
-          <div class="stat-card"><div class="stat-title">Offene Termine</div><div id="statOpenTerms" class="stat-value">00</div></div>
-          <div class="stat-card"><div class="stat-title">Registraturen</div><div id="statRegistries" class="stat-value">00</div></div>
-        </div>
-      </section>
-
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="hierarchie">Hierarchie</button>
-        <button class="tab-btn" data-tab="termine">Gerichtstermine</button>
-        <button class="tab-btn" data-tab="registraturen">Registraturen</button>
-        <button class="tab-btn" data-tab="notizen">Notizen</button>
-      </div>
-
-      <section id="view-hierarchie" class="section-view active">
-        <div class="section-head">
-          <div>
-            <h2>Hierarchie</h2>
-            <p>Department Struktur und Mitglieder</p>
-          </div>
-        </div>
-        <div id="ranksContainer"></div>
-      </section>
-
-      <section id="view-termine" class="section-view">
-        <div class="section-head">
-          <div>
-            <h2>Gerichtstermine</h2>
-            <p>Alle offenen und geschlossenen Termine</p>
-          </div>
-          <div class="topbar-right">
-            <button id="filterOpenBtn" class="btn">Offen</button>
-            <button id="filterClosedBtn" class="btn">Geschlossen</button>
-            <button id="filterAllBtn" class="btn primary">Alle</button>
-          </div>
-        </div>
-        <div id="termsContainer"></div>
-      </section>
-
-      <section id="view-registraturen" class="section-view">
-        <div class="section-head">
-          <div>
-            <h2>Registraturen</h2>
-            <p>Beschlüsse, Urteile und weitere Einträge</p>
-          </div>
-        </div>
-        <div id="registriesContainer"></div>
-      </section>
-
-      <section id="view-notizen" class="section-view">
-        <div class="section-head">
-          <div>
-            <h2>Notizen</h2>
-            <p>Öffentliche Notizen der Mitglieder</p>
-          </div>
-        </div>
-        <div id="notesContainer"></div>
-      </section>
+      <section class="hero"><div><div class="hero-pill">Department Overview</div><h1>Department of Justice</h1><p>Interne Übersicht des staatlichen DOJ von Senora City.</p></div><div class="stats"><div class="stat-card card"><div class="stat-title">Mitglieder</div><div id="statMembers" class="stat-value">0</div></div><div class="stat-card card"><div class="stat-title">Ränge</div><div id="statRanks" class="stat-value">0</div></div><div class="stat-card card"><div class="stat-title">Offene Termine</div><div id="statOpenTerms" class="stat-value">0</div></div><div class="stat-card card"><div class="stat-title">Registraturen</div><div id="statRegistries" class="stat-value">0</div></div></div></section>
+      <div class="tabs"><button class="tab-btn active" data-tab="hierarchie">Hierarchie</button><button class="tab-btn" data-tab="termine">Gerichtstermine</button><button class="tab-btn" data-tab="registraturen">Registraturen</button><button class="tab-btn" data-tab="notizen">Notizen</button><button id="ownerWebhookTab" class="tab-btn hidden" data-tab="webhooks">Webhooks</button></div>
+      <section id="view-hierarchie" class="section-view active"><div class="section-head"><div><h2>Hierarchie</h2><p>Department Struktur und Mitglieder</p></div><div class="search-box">Senora City DOJ Panel</div></div><div id="ranksContainer"></div></section>
+      <section id="view-termine" class="section-view"><div class="section-head"><div><h2>Gerichtstermine</h2><p>Alle offenen und abgeschlossenen Termine</p></div><div class="topbar-right" style="gap:8px;"><button id="filterOpenBtn" class="btn">Offen</button><button id="filterClosedBtn" class="btn">Geschlossen</button><button id="filterAllBtn" class="btn primary">Alle</button></div></div><div id="termsContainer"></div></section>
+      <section id="view-registraturen" class="section-view"><div class="section-head"><div><h2>Registraturen</h2><p>Beschlüsse, Urteile und weitere Einträge</p></div><div class="topbar-right" style="gap:8px;"><button id="createRegistryButton" class="btn primary" type="button">Eintrag erstellen</button></div></div><div id="registriesContainer"></div></section>
+      <section id="view-notizen" class="section-view"><div class="section-head"><div><h2>Notizen</h2><p>Öffentliche und private Notizen</p></div></div><div id="notesContainer"></div></section>
+      <section id="view-webhooks" class="section-view"><div class="section-head"><div><h2>Webhook Übersicht</h2><p>Akten, Registraturen und Gerichtsurteile</p></div></div><div class="panel"><div class="panel-head"><div class="heading">Aktive Webhooks</div></div><div id="webhooksOverview" class="list"></div></div></section>
     </main>
   </div>
 
   <script>
     (() => {
-      const STORAGE_KEY = 'senora_city_doj_clean_v2';
-
-      const ranks = [
-        { key: 'attorney_general', level: '12er', title: 'Attorney General' },
-        { key: 'deputy_attorney_general', level: '11er', title: 'Deputy Attorney General' },
-        { key: 'district_attorney', level: '10er', title: 'District Attorney' },
-        { key: 'assistant_district_attorney', level: '9er', title: 'Assistant District Attorney' },
-        { key: 'state_attorney', level: '8er', title: 'State Attorney' },
-        { key: 'deputy_state_attorney', level: '7er', title: 'Deputy State Attorney' },
-        { key: 'chief_of_staff', level: '6er', title: 'Chief of Staff' },
-        { key: 'communications_director', level: '5er', title: 'Director of Communications' },
-        { key: 'deputy_communications_director', level: '4er', title: 'Deputy Director of Communications' },
-        { key: 'mail_services_supervisor', level: '3er', title: 'Mail Services Supervisor' },
-        { key: 'district_judge', level: '2er', title: 'District Judge' },
-        { key: 'pardon_attorney', level: '1er', title: 'United States Pardon Attorney' }
-      ];
-
-      const registryTemplates = [
-        {
-          key: 'durchsuchungsbeschluss',
-          title: 'Durchsuchungsbeschluss',
-          body: `Senora City, den TT.MM.JJJJ
-# Durchsuchungsbeschluss
-
-Text eintragen...`
-        },
-        {
-          key: 'vollstreckungsbeschluss',
-          title: 'Vollstreckungsbeschluss',
-          body: `Senora City, den TT.MM.JJJJ
-# Vollstreckungsbeschluss
-
-Text eintragen...`
-        },
-        {
-          key: 'zulassungsbeschluss',
-          title: 'Zulassungsbeschluss',
-          body: `Senora City, den TT.MM.JJJJ
-# Zulassungsbeschluss
-
-Text eintragen...`
-        },
-        {
-          key: 'scheidungsbeschluss',
-          title: 'Scheidungsbeschluss',
-          body: `verkündet am: TT.MM.JJJJ
-**im Namen des Volkes**
-# Scheidungsbeschluss
-
-Text eintragen...`
-        },
-        {
-          key: 'urteil',
-          title: 'Urteil',
-          body: `verkündet am: TT.MM.JJJJ
-**im Namen des Volkes**
-# Urteil
-
-Text eintragen...`
-        },
-        {
-          key: 'eroeffnungsbeschluss',
-          title: 'Eröffnungsbeschluss',
-          body: `Senora City, den TT.MM.JJJJ
-# Eröffnungsbeschluss
-
-Text eintragen...`
-        }
+      const STORAGE_KEY = 'doj_v4_working';
+      const templates = [
+        { key: 'durchsuchungsbeschluss_standard', title: 'Durchsuchungsbeschluss', body: 'Senora City, den TT.MM.JJJJ\n# Durchsuchungsbeschluss\n\nText eintragen...' },
+        { key: 'vollstreckungsbeschluss', title: 'Vollstreckungsbeschluss', body: 'Senora City, den TT.MM.JJJJ\n# Vollstreckungsbeschluss\n\nText eintragen...' },
+        { key: 'zulassungsbeschluss', title: 'Zulassungsbeschluss', body: 'Senora City, den TT.MM.JJJJ\n# Zulassungsbeschluss\n\nText eintragen...' },
+        { key: 'eroeffnungsbeschluss', title: 'Eröffnungsbeschluss', body: 'Senora City, den TT.MM.JJJJ\n# Eröffnungsbeschluss\n\nText eintragen...' }
       ];
 
       const defaultData = {
-        users: [
-          { username: 'owner', password: '1111', role: 'owner', memberId: 'owner-root' }
-        ],
-        members: [
-          {
-            id: 'owner-root',
-            rankKey: 'attorney_general',
-            rankLevel: '12er',
-            rankTitle: 'Attorney General',
-            name: 'Owner',
-            discordName: 'owner#0001',
-            discordId: '000000000000000001',
-            loginUsername: 'owner',
-            status: 'AKTIV',
-            warnings: [],
-            sanctions: [],
-            publicNotes: '',
-            privateNotes: ''
-          }
-        ],
-        ranks,
+        users: [{ username: 'owner', password: '1111', role: 'owner', memberId: 'owner-root', permissions: { canWriteTerms: true, canWriteRegistries: true } }],
+        members: [{ id: 'owner-root', rankKey: 'attorney_general', rankLevel: '12er', rankTitle: 'Attorney General', name: 'Owner', discordName: 'owner#0001', discordId: '000000000000000001', loginUsername: 'owner', status: 'AKTIV', warnings: [], sanctions: [], publicNotes: '', privateNotes: '', notes: '' }],
+        webhooks: { akten: '', registraturen: '', gerichtsurteile: '' },
         courtTerms: [],
-        registries: []
+        registries: [],
+        ranks: [
+          { key: 'attorney_general', level: '12er', title: 'Attorney General' },
+          { key: 'deputy_attorney_general', level: '11er', title: 'Deputy Attorney General' },
+          { key: 'district_attorney', level: '10er', title: 'District Attorney' },
+          { key: 'assistant_district_attorney', level: '9er', title: 'Assistant District Attorney' },
+          { key: 'state_attorney', level: '8er', title: 'State Attorney' },
+          { key: 'deputy_state_attorney', level: '7er', title: 'Deputy State Attorney' },
+          { key: 'chief_of_staff', level: '6er', title: 'Chief of Staff' },
+          { key: 'communications_director', level: '5er', title: 'Director of Communications' },
+          { key: 'deputy_communications_director', level: '4er', title: 'Deputy Director of Communications' },
+          { key: 'mail_services_supervisor', level: '3er', title: 'Mail Services Supervisor' },
+          { key: 'district_judge', level: '2er', title: 'District Judge' },
+          { key: 'pardon_attorney', level: '1er', title: 'United States Pardon Attorney' }
+        ]
       };
 
-      let db = loadData();
+      let db = load();
       let currentUser = null;
       let currentTermFilter = 'all';
+      let selectedMemberId = null;
+      let selectedTermId = null;
+      let selectedRegistryId = null;
 
-      const $ = (id) => document.getElementById(id);
-
-      const el = {
-        loginOverlay: $('loginOverlay'),
-        loginForm: $('loginForm'),
-        loginUsername: $('loginUsername'),
-        loginPassword: $('loginPassword'),
-        loginError: $('loginError'),
-        app: $('app'),
-        currentUserBadge: $('currentUserBadge'),
-        addMemberButton: $('addMemberButton'),
-        createTermButton: $('createTermButton'),
-        createRegistryButton: $('createRegistryButton'),
-        resetDataButton: $('resetDataButton'),
-        logoutButton: $('logoutButton'),
-        memberModal: $('memberModal'),
-        memberForm: $('memberForm'),
-        memberRank: $('memberRank'),
-        memberError: $('memberError'),
-        closeMemberModal: $('closeMemberModal'),
-        cancelMemberModal: $('cancelMemberModal'),
-        termModal: $('termModal'),
-        termForm: $('termForm'),
-        termError: $('termError'),
-        closeTermModal: $('closeTermModal'),
-        cancelTermModal: $('cancelTermModal'),
-        registryModal: $('registryModal'),
-        registryForm: $('registryForm'),
-        registryTemplate: $('registryTemplate'),
-        registryPreview: $('registryPreview'),
-        registryError: $('registryError'),
-        closeRegistryModal: $('closeRegistryModal'),
-        cancelRegistryModal: $('cancelRegistryModal'),
-        applyRegistryTemplateButton: $('applyRegistryTemplateButton'),
-        detailModal: $('detailModal'),
-        detailTitle: $('detailTitle'),
-        detailContent: $('detailContent'),
-        closeDetailModal: $('closeDetailModal'),
-        ranksContainer: $('ranksContainer'),
-        termsContainer: $('termsContainer'),
-        registriesContainer: $('registriesContainer'),
-        notesContainer: $('notesContainer'),
-        statMembers: $('statMembers'),
-        statRanks: $('statRanks'),
-        statOpenTerms: $('statOpenTerms'),
-        statRegistries: $('statRegistries'),
-        filterOpenBtn: $('filterOpenBtn'),
-        filterClosedBtn: $('filterClosedBtn'),
-        filterAllBtn: $('filterAllBtn')
+      const $ = id => document.getElementById(id);
+      const els = {
+        loginOverlay: $('loginOverlay'), app: $('app'), loginForm: $('loginForm'), loginError: $('loginError'),
+        memberModal: $('memberModal'), memberForm: $('memberForm'), memberError: $('memberError'), memberDetailModal: $('memberDetailModal'), memberDetailContent: $('memberDetailContent'),
+        settingsModal: $('settingsModal'), webhookForm: $('webhookForm'),
+        termModal: $('termModal'), termForm: $('termForm'), termError: $('termError'), termDetailModal: $('termDetailModal'), termDetailContent: $('termDetailContent'),
+        judgmentModal: $('judgmentModal'), judgmentForm: $('judgmentForm'), judgmentPreview: $('judgmentPreview'),
+        registryModal: $('registryModal'), registryForm: $('registryForm'), registryError: $('registryError'), registryPreview: $('registryPreview'), registryDetailModal: $('registryDetailModal'), registryDetailContent: $('registryDetailContent'),
+        currentUserBadge: $('currentUserBadge'), addMemberButton: $('addMemberButton'), settingsButton: $('settingsButton'), createTermButton: $('createTermButton'), createRegistryButton: $('createRegistryButton'), ownerWebhookTab: $('ownerWebhookTab'),
+        ranksContainer: $('ranksContainer'), termsContainer: $('termsContainer'), registriesContainer: $('registriesContainer'), notesContainer: $('notesContainer'), webhooksOverview: $('webhooksOverview'),
+        statMembers: $('statMembers'), statRanks: $('statRanks'), statOpenTerms: $('statOpenTerms'), statRegistries: $('statRegistries')
       };
 
       init();
 
       function init() {
-        repairOwnerLogin();
         fillRankSelect();
-        fillRegistryTemplates();
-        bindEvents();
-        renderAll();
+        fillTemplates();
+        bind();
+        renderStats();
       }
 
-      function bindEvents() {
-        el.loginForm.addEventListener('submit', handleLogin);
-        el.logoutButton.addEventListener('click', logout);
-        el.addMemberButton.addEventListener('click', () => openModal(el.memberModal));
-        el.createTermButton.addEventListener('click', () => openModal(el.termModal));
-        el.createRegistryButton.addEventListener('click', openRegistryModal);
-        el.resetDataButton.addEventListener('click', resetData);
-
-        el.closeMemberModal.addEventListener('click', () => closeModal(el.memberModal));
-        el.cancelMemberModal.addEventListener('click', () => closeModal(el.memberModal));
-        el.closeTermModal.addEventListener('click', () => closeModal(el.termModal));
-        el.cancelTermModal.addEventListener('click', () => closeModal(el.termModal));
-        el.closeRegistryModal.addEventListener('click', () => closeModal(el.registryModal));
-        el.cancelRegistryModal.addEventListener('click', () => closeModal(el.registryModal));
-        el.closeDetailModal.addEventListener('click', () => closeModal(el.detailModal));
-
-        el.memberForm.addEventListener('submit', saveMember);
-        el.termForm.addEventListener('submit', saveTerm);
-        el.registryForm.addEventListener('submit', saveRegistry);
-        el.applyRegistryTemplateButton.addEventListener('click', applyRegistryTemplate);
-
-        ['registryCaseNumber', 'registryProcedure', 'registryTitle', 'registryDocsLink', 'registryBody'].forEach((id) => {
-          $(id).addEventListener('input', updateRegistryPreview);
-        });
-
-        el.filterOpenBtn.addEventListener('click', () => setTermFilter('open'));
-        el.filterClosedBtn.addEventListener('click', () => setTermFilter('closed'));
-        el.filterAllBtn.addEventListener('click', () => setTermFilter('all'));
-
-        document.querySelectorAll('.tab-btn[data-tab]').forEach((btn) => {
-          btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-        });
+      function bind() {
+        $('loginForm').addEventListener('submit', login);
+        $('logoutButton').addEventListener('click', logout);
+        $('addMemberButton').addEventListener('click', () => openModal('memberModal'));
+        $('settingsButton').addEventListener('click', openSettings);
+        $('createTermButton').addEventListener('click', openTerm);
+        $('createRegistryButton').addEventListener('click', openRegistry);
+        $('applyRegistryTemplateButton').addEventListener('click', applyTemplate);
+        $('editRegistryButton').addEventListener('click', editRegistry);
+        $('memberForm').addEventListener('submit', saveMember);
+        $('webhookForm').addEventListener('submit', saveWebhooks);
+        $('termForm').addEventListener('submit', saveTerm);
+        $('judgmentForm').addEventListener('submit', saveJudgment);
+        $('registryForm').addEventListener('submit', saveRegistry);
+        $('announceJudgmentButton').addEventListener('click', openJudgment);
+        $('closeSelectedTermButton').addEventListener('click', closeSelectedTerm);
+        $('filterOpenBtn').addEventListener('click', () => { currentTermFilter = 'open'; renderTerms(); });
+        $('filterClosedBtn').addEventListener('click', () => { currentTermFilter = 'closed'; renderTerms(); });
+        $('filterAllBtn').addEventListener('click', () => { currentTermFilter = 'all'; renderTerms(); });
+        ['closeMemberModal','cancelMemberModal','closeMemberDetailModal','closeSettingsModal','cancelSettingsModal','closeTermModal','cancelTermModal','closeTermDetailModal','closeJudgmentModal','cancelJudgmentModal','closeRegistryModal','cancelRegistryModal','closeRegistryDetailModal'].forEach(id => $(id).addEventListener('click', () => closeModal($(id).closest('.overlay').id)));
+        document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+        ['judgmentCaseNumber','judgmentTitle','judgmentFacts','judgmentConclusion','judgmentDecisionBy','judgmentDocsLink'].forEach(id => $(id).addEventListener('input', updateJudgmentPreview));
+        ['registryCaseNumber','registryProcedure','registryTitle','registryBody','registryDocsLink','registryMentionIds'].forEach(id => $(id).addEventListener('input', updateRegistryPreview));
+        window.addWarning = addWarning;
+        window.clearWarnings = clearWarnings;
+        window.addSanction = addSanction;
+        window.removeSanction = removeSanction;
+        window.setMemberStatus = setMemberStatus;
+        window.saveMemberChanges = saveMemberChanges;
+        window.deleteSelectedMember = deleteSelectedMember;
       }
 
-      function handleLogin(event) {
-        event.preventDefault();
+      function login(e) {
+        e.preventDefault();
+        const u = $('loginUsername').value.trim();
+        const p = $('loginPassword').value.trim();
+        const found = db.users.find(x => x.username === u && x.password === p);
+        if (!found) return showError(els.loginError, 'Benutzername oder Passwort ist falsch.');
+        currentUser = found;
+        hide(els.loginError);
+        $('loginForm').reset();
+        openApp();
+      }
 
-        const username = el.loginUsername.value.trim().toLowerCase();
-        const password = el.loginPassword.value.trim();
-
-        repairOwnerLogin();
-
-        const user = db.users.find((item) => {
-          return String(item.username).trim().toLowerCase() === username && String(item.password).trim() === password;
-        });
-
-        if (!user) {
-          showText(el.loginError, 'Benutzername oder Passwort ist falsch. Für Owner: owner / 1111');
-          return;
+      function openApp() {
+        hide(els.loginOverlay);
+        show(els.app);
+        if (isOwner()) {
+          els.currentUserBadge.textContent = 'Eingeloggt als Owner';
+          show(els.addMemberButton);
+          show(els.settingsButton);
+          show(els.ownerWebhookTab);
+          show(els.createTermButton);
+          show(els.createRegistryButton);
+        } else {
+          els.currentUserBadge.textContent = 'Eingeloggt als Mitglied';
+          hide(els.addMemberButton);
+          hide(els.settingsButton);
+          hide(els.ownerWebhookTab);
+          const p = perm();
+          els.createTermButton.style.display = p.canWriteTerms ? '' : 'none';
+          els.createRegistryButton.style.display = p.canWriteRegistries ? '' : 'none';
+          if ($('view-webhooks').classList.contains('active')) switchTab('hierarchie');
         }
-
-        currentUser = user;
-        el.loginForm.reset();
-        hide(el.loginError);
-        closeModal(el.loginOverlay);
-        show(el.app);
-        updateUserView();
         renderAll();
       }
 
       function logout() {
         currentUser = null;
-        closeAllModals();
-        hide(el.app);
-        show(el.loginOverlay);
-      }
-
-      function updateUserView() {
-        const owner = isOwner();
-        el.currentUserBadge.textContent = owner ? 'Eingeloggt als Owner' : 'Eingeloggt als Mitglied';
-        toggle(el.addMemberButton, owner);
-        toggle(el.resetDataButton, owner);
-      }
-
-      function repairOwnerLogin() {
-        if (!Array.isArray(db.users)) db.users = [];
-        if (!Array.isArray(db.members)) db.members = [];
-
-        let ownerUser = db.users.find((user) => String(user.username).trim().toLowerCase() === 'owner');
-        if (!ownerUser) {
-          ownerUser = { username: 'owner', password: '1111', role: 'owner', memberId: 'owner-root' };
-          db.users.unshift(ownerUser);
-        }
-
-        ownerUser.username = 'owner';
-        ownerUser.password = '1111';
-        ownerUser.role = 'owner';
-        ownerUser.memberId = 'owner-root';
-
-        let ownerMember = db.members.find((member) => member.id === 'owner-root');
-        if (!ownerMember) {
-          ownerMember = clone(defaultData.members[0]);
-          db.members.unshift(ownerMember);
-        }
-
-        saveData();
-      }
-
-      function fillRankSelect() {
-        el.memberRank.innerHTML = db.ranks.map((rank) => {
-          return `<option value="${escapeHtml(rank.key)}">${escapeHtml(rank.level)} | ${escapeHtml(rank.title)}</option>`;
-        }).join('');
-      }
-
-      function fillRegistryTemplates() {
-        el.registryTemplate.innerHTML = registryTemplates.map((template) => {
-          return `<option value="${escapeHtml(template.key)}">${escapeHtml(template.title)}</option>`;
-        }).join('');
-        updateRegistryPreview();
+        hideAllModals();
+        hide(els.app);
+        show(els.loginOverlay);
       }
 
       function renderAll() {
-        autoCloseExpiredTerms();
+        autoCloseTerms();
         renderStats();
         renderRanks();
         renderTerms();
         renderRegistries();
         renderNotes();
+        renderWebhooks();
       }
 
       function renderStats() {
-        el.statMembers.textContent = pad2(db.members.length);
-        el.statRanks.textContent = pad2(db.ranks.length);
-        el.statOpenTerms.textContent = pad2(db.courtTerms.filter((term) => getTermStatus(term) === 'open').length);
-        el.statRegistries.textContent = pad2(db.registries.length);
+        els.statMembers.textContent = pad(db.members.length);
+        els.statRanks.textContent = pad(db.ranks.length);
+        els.statOpenTerms.textContent = pad(db.courtTerms.filter(t => termStatus(t) === 'open').length);
+        els.statRegistries.textContent = pad(db.registries.length);
+      }
+
+      function fillRankSelect() {
+        $('memberRank').innerHTML = db.ranks.map(r => `<option value="${esc(r.key)}">${esc(r.level)} | ${esc(r.title)}</option>`).join('');
+      }
+
+      function fillTemplates() {
+        $('registryTemplate').innerHTML = templates.map(t => `<option value="${esc(t.key)}">${esc(t.title)}</option>`).join('');
+        updateRegistryPreview();
       }
 
       function renderRanks() {
-        el.ranksContainer.innerHTML = '';
-
-        db.ranks.forEach((rank) => {
-          const members = db.members.filter((member) => member.rankKey === rank.key);
-          const section = document.createElement('section');
-          section.className = 'card';
-
-          const listHtml = members.length ? members.map((member) => {
-            const warnings = Array.isArray(member.warnings) ? member.warnings.length : 0;
+        els.ranksContainer.innerHTML = '';
+        db.ranks.forEach(rank => {
+          const members = db.members.filter(m => m.rankKey === rank.key);
+          const html = members.length ? members.map(member => {
             const statusClass = member.status === 'AKTIV' ? 'green' : member.status === 'ABGEMELDET' ? 'yellow' : 'gray';
-            return `
-              <div class="row" data-member-id="${escapeHtml(member.id)}">
-                <div>
-                  <div class="row-title">${escapeHtml(member.name)}</div>
-                  <div class="row-meta">
-                    <span>Discord: ${escapeHtml(member.discordName)}</span>
-                    <span>Login: ${escapeHtml(member.loginUsername)}</span>
-                    <span>Warnungen: ${warnings}/3</span>
-                  </div>
-                </div>
-                <div class="row-side">
-                  <span class="tag ${statusClass}">${escapeHtml(member.status)}</span>
-                  <span class="tag blue">${escapeHtml(rank.level)}</span>
-                </div>
-              </div>
-            `;
-          }).join('') : `
-            <div class="row">
-              <div>
-                <div class="row-title">Keine Einträge</div>
-                <div class="row-meta"><span>Für diesen Rang wurde noch niemand eingetragen.</span></div>
-              </div>
-            </div>
-          `;
-
-          section.innerHTML = `
-            <div class="card-head">
-              <div class="row-side">
-                <span class="tag blue">${escapeHtml(rank.level)}</span>
-                <div class="card-title">${escapeHtml(rank.title)}</div>
-              </div>
-              <span class="tag gray">${members.length}</span>
-            </div>
-            <div class="row-list">${listHtml}</div>
-          `;
-
-          el.ranksContainer.appendChild(section);
+            const shortNote = (member.publicNotes || '').trim() ? `<span>Notiz: ${esc((member.publicNotes || '').slice(0, 40))}${(member.publicNotes || '').length > 40 ? '...' : ''}</span>` : '';
+            return `<div class="row" data-member-id="${esc(member.id)}"><div class="main"><div class="name">${esc(member.name)}</div><div class="meta"><span>Discord: ${esc(member.discordName)}</span><span>Login: ${esc(member.loginUsername)}</span><span>Warnungen: ${(member.warnings || []).length}/3</span>${shortNote}</div></div><div class="side"><span class="tag ${statusClass}">${esc(member.status)}</span><span class="tag blue">${esc(rank.level)}</span></div></div>`;
+          }).join('') : `<div class="row"><div class="main"><div class="name">Keine Einträge</div><div class="meta"><span>Für diesen Rang wurde noch niemand eingetragen.</span></div></div></div>`;
+          const section = document.createElement('section');
+          section.className = 'rank-section';
+          section.innerHTML = `<div class="rank-head"><div class="rank-left"><div class="badge">${esc(rank.level)}</div><div class="heading">${esc(rank.title)}</div></div><div class="count-badge">${members.length}</div></div><div class="list">${html}</div>`;
+          els.ranksContainer.appendChild(section);
         });
-
-        el.ranksContainer.querySelectorAll('[data-member-id]').forEach((row) => {
-          row.addEventListener('click', () => openMemberDetail(row.dataset.memberId));
-        });
+        els.ranksContainer.querySelectorAll('[data-member-id]').forEach(row => row.addEventListener('click', () => openMemberDetail(row.dataset.memberId)));
       }
 
       function renderTerms() {
-        const terms = db.courtTerms
-          .slice()
-          .sort((a, b) => String(a.date).localeCompare(String(b.date)))
-          .filter((term) => {
-            const status = getTermStatus(term);
-            if (currentTermFilter === 'open') return status === 'open';
-            if (currentTermFilter === 'closed') return status === 'closed';
-            return true;
-          });
-
-        if (!terms.length) {
-          el.termsContainer.innerHTML = `
-            <div class="card">
-              <div class="card-title">Keine Gerichtstermine</div>
-              <div class="row-meta"><span>Es wurden noch keine passenden Termine eingetragen.</span></div>
-            </div>
-          `;
-          return;
-        }
-
-        el.termsContainer.innerHTML = terms.map((term) => {
-          const status = getTermStatus(term);
-          return `
-            <div class="card">
-              <div class="row" data-term-id="${escapeHtml(term.id)}">
-                <div>
-                  <div class="row-title">${escapeHtml(term.title)}</div>
-                  <div class="row-meta">
-                    <span>Datum: ${escapeHtml(formatDate(term.date))}</span>
-                    <span>Richter: ${escapeHtml(term.judge)}</span>
-                    <span>Erstellt von: ${escapeHtml(term.createdBy)}</span>
-                  </div>
-                </div>
-                <div class="row-side">
-                  <span class="tag ${status === 'open' ? 'green' : 'gray'}">${status === 'open' ? 'OFFEN' : 'GESCHLOSSEN'}</span>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        el.termsContainer.querySelectorAll('[data-term-id]').forEach((row) => {
-          row.addEventListener('click', () => openTermDetail(row.dataset.termId));
-        });
+        const items = db.courtTerms.filter(t => currentTermFilter === 'all' || termStatus(t) === currentTermFilter).sort((a,b) => a.date.localeCompare(b.date));
+        els.termsContainer.innerHTML = items.length ? items.map(term => {
+          const status = termStatus(term);
+          return `<div class="panel"><div class="row" data-term-id="${esc(term.id)}"><div class="main"><div class="name">${esc(term.title)}</div><div class="meta"><span>Datum: ${formatDate(term.date)}</span><span>Führender Richter: ${esc(term.judge)}</span><span>Erstellt von: ${esc(term.createdBy)}</span></div></div><div class="side"><span class="tag ${status === 'open' ? 'green' : 'gray'}">${status === 'open' ? 'OFFEN' : 'GESCHLOSSEN'}</span>${term.judgment ? '<span class="tag yellow">URTEIL</span>' : ''}</div></div></div>`;
+        }).join('') : `<div class="panel"><div class="name">Keine Gerichtstermine</div><div class="meta"><span>Es wurden noch keine passenden Termine eingetragen.</span></div></div>`;
+        els.termsContainer.querySelectorAll('[data-term-id]').forEach(row => row.addEventListener('click', () => openTermDetail(row.dataset.termId)));
       }
 
       function renderRegistries() {
-        if (!db.registries.length) {
-          el.registriesContainer.innerHTML = `
-            <div class="card">
-              <div class="card-title">Keine Registraturen</div>
-              <div class="row-meta"><span>Es wurden noch keine Einträge erstellt.</span></div>
-            </div>
-          `;
-          return;
-        }
-
-        el.registriesContainer.innerHTML = db.registries.map((item) => {
-          return `
-            <div class="card">
-              <div class="row" data-registry-id="${escapeHtml(item.id)}">
-                <div>
-                  <div class="row-title">${escapeHtml(item.title)}</div>
-                  <div class="row-meta">
-                    <span>Aktenzeichen: ${escapeHtml(item.caseNumber)}</span>
-                    <span>Verfahren: ${escapeHtml(item.procedure)}</span>
-                    <span>Erstellt von: ${escapeHtml(item.createdBy)}</span>
-                  </div>
-                </div>
-                <div class="row-side"><span class="tag blue">Registratur</span></div>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        el.registriesContainer.querySelectorAll('[data-registry-id]').forEach((row) => {
-          row.addEventListener('click', () => openRegistryDetail(row.dataset.registryId));
-        });
+        els.registriesContainer.innerHTML = db.registries.length ? db.registries.map(item => `<div class="panel"><div class="row" data-registry-id="${esc(item.id)}"><div class="main"><div class="name">${esc(item.title)}</div><div class="meta"><span>Aktenzeichen: ${esc(item.caseNumber)}</span><span>Verfahren: ${esc(item.procedure)}</span><span>Erstellt von: ${esc(item.createdBy || 'system')}</span></div></div><div class="side"><span class="tag blue">Registratur</span></div></div></div>`).join('') : `<div class="panel"><div class="name">Keine Registraturen</div><div class="meta"><span>Es wurden noch keine Einträge erstellt.</span></div></div>`;
+        els.registriesContainer.querySelectorAll('[data-registry-id]').forEach(row => row.addEventListener('click', () => openRegistryDetail(row.dataset.registryId)));
       }
 
       function renderNotes() {
-        const visible = db.members.filter((member) => String(member.publicNotes || '').trim());
-
-        if (!visible.length) {
-          el.notesContainer.innerHTML = `
-            <div class="card">
-              <div class="card-title">Keine Notizen</div>
-              <div class="row-meta"><span>Noch keine Einträge vorhanden.</span></div>
-            </div>
-          `;
-          return;
-        }
-
-        el.notesContainer.innerHTML = visible.map((member) => {
-          return `
-            <div class="card">
-              <div class="card-head">
-                <div class="card-title">${escapeHtml(member.name)}</div>
-                <span class="tag blue">${escapeHtml(member.rankTitle)}</span>
-              </div>
-              <div class="detail-block">${escapeHtml(member.publicNotes)}</div>
-            </div>
-          `;
-        }).join('');
+        const visible = db.members.filter(m => (m.publicNotes || '').trim() || (isOwner() && (m.privateNotes || '').trim()));
+        els.notesContainer.innerHTML = visible.length ? visible.map(m => `<div class="panel"><div class="panel-head"><div class="heading">${esc(m.name)}</div><div class="side"><span class="tag blue">${esc(m.rankTitle)}</span></div></div>${(m.publicNotes || '').trim() ? `<div class="detail-block card"><h4>Öffentliche Notizen</h4><p>${esc(m.publicNotes)}</p></div>` : ''}${isOwner() && (m.privateNotes || '').trim() ? `<div class="detail-block card"><h4>Private Notizen</h4><p>${esc(m.privateNotes)}</p></div>` : ''}</div>`).join('') : `<div class="panel"><div class="name">Keine Notizen</div><div class="meta"><span>Noch keine Einträge vorhanden.</span></div></div>`;
       }
 
-      function saveMember(event) {
-        event.preventDefault();
+      function renderWebhooks() {
+        const rows = [['Akten', db.webhooks.akten], ['Registraturen', db.webhooks.registraturen], ['Gerichtsurteile', db.webhooks.gerichtsurteile]];
+        els.webhooksOverview.innerHTML = rows.map(([name, value]) => `<div class="panel" style="padding:16px;"><div class="row" style="cursor:default;padding:0;border:none;background:none;box-shadow:none;"><div class="main"><div class="name">${esc(name)}</div><div class="meta"><span>${value ? esc(maskWebhook(value)) : 'Nicht eingetragen'}</span></div></div><div class="side"><span class="tag ${value ? 'green' : 'gray'}">${value ? 'AKTIV' : 'LEER'}</span></div></div></div>`).join('');
+      }
+
+      function openSettings() {
         if (!isOwner()) return;
+        $('aktenWebhook').value = db.webhooks.akten || '';
+        $('registraturenWebhook').value = db.webhooks.registraturen || '';
+        $('urteileWebhook').value = db.webhooks.gerichtsurteile || '';
+        openModal('settingsModal');
+      }
 
-        const rank = db.ranks.find((item) => item.key === value('memberRank'));
-        const name = value('memberName');
-        const username = value('memberUsername').toLowerCase();
-        const password = value('memberPassword');
-        const discordName = value('memberDiscordName');
-        const discordId = value('memberDiscordId');
-        const status = value('memberStatus');
+      function saveWebhooks(e) {
+        e.preventDefault();
+        db.webhooks.akten = $('aktenWebhook').value.trim();
+        db.webhooks.registraturen = $('registraturenWebhook').value.trim();
+        db.webhooks.gerichtsurteile = $('urteileWebhook').value.trim();
+        save();
+        closeModal('settingsModal');
+        renderWebhooks();
+      }
 
-        if (!rank || !name || !username || !password || !discordName || !discordId) {
-          showText(el.memberError, 'Bitte alle Felder ausfüllen.');
-          return;
-        }
-
-        const exists = db.users.some((user) => String(user.username).toLowerCase() === username);
-        if (exists) {
-          showText(el.memberError, 'Dieser Benutzername existiert bereits.');
-          return;
-        }
-
-        const memberId = `member-${Date.now()}`;
-        db.members.push({
-          id: memberId,
-          rankKey: rank.key,
-          rankLevel: rank.level,
-          rankTitle: rank.title,
-          name,
-          discordName,
-          discordId,
-          loginUsername: username,
-          status,
-          warnings: [],
-          sanctions: [],
-          publicNotes: '',
-          privateNotes: ''
-        });
-
-        db.users.push({ username, password, role: 'member', memberId });
-        saveData();
-        el.memberForm.reset();
-        hide(el.memberError);
-        closeModal(el.memberModal);
+      function saveMember(e) {
+        e.preventDefault();
+        if (!isOwner()) return;
+        const rankKey = $('memberRank').value;
+        const rank = db.ranks.find(r => r.key === rankKey);
+        const name = $('memberName').value.trim();
+        const username = $('memberUsername').value.trim();
+        const password = $('memberPassword').value.trim();
+        const discordName = $('memberDiscordName').value.trim();
+        const discordId = $('memberDiscordId').value.trim();
+        const status = $('memberStatus').value;
+        if (!rank || !name || !username || !password || !discordName || !discordId) return showError(els.memberError, 'Bitte alle Felder ausfüllen.');
+        if (db.users.some(u => u.username.toLowerCase() === username.toLowerCase())) return showError(els.memberError, 'Der Benutzername existiert bereits.');
+        const id = 'member-' + Date.now();
+        db.members.push({ id, rankKey: rank.key, rankLevel: rank.level, rankTitle: rank.title, name, discordName, discordId, loginUsername: username, status, warnings: [], sanctions: [], publicNotes: '', privateNotes: '', notes: '' });
+        db.users.push({ username, password, role: 'member', memberId: id, permissions: { canWriteTerms: false, canWriteRegistries: false } });
+        save();
+        closeModal('memberModal');
+        els.memberForm.reset();
+        hide(els.memberError);
         renderAll();
       }
 
-      function saveTerm(event) {
-        event.preventDefault();
+      function openTerm() {
+        if (!currentUser || !perm().canWriteTerms) return;
+        els.termForm.reset();
+        openModal('termModal');
+      }
 
-        const date = value('termDate');
-        const judge = value('termJudge');
-        const title = value('termTitle');
-        const description = value('termDescription');
-        const participants = value('termParticipants');
-
-        if (!date || !judge || !title || !description) {
-          showText(el.termError, 'Bitte Datum, Richter, Überschrift und Beschreibung ausfüllen.');
-          return;
-        }
-
-        db.courtTerms.push({
-          id: `term-${Date.now()}`,
-          date,
-          judge,
-          title,
-          description,
-          participants,
-          status: getStatusByDate(date),
-          createdBy: currentUser ? currentUser.username : 'system',
-          createdAt: new Date().toISOString()
-        });
-
-        saveData();
-        el.termForm.reset();
-        hide(el.termError);
-        closeModal(el.termModal);
+      function saveTerm(e) {
+        e.preventDefault();
+        if (!currentUser || !perm().canWriteTerms) return;
+        const date = $('termDate').value;
+        const judge = $('termJudge').value.trim();
+        const title = $('termTitle').value.trim();
+        const description = $('termDescription').value.trim();
+        const participants = $('termParticipants').value.trim();
+        const mentionIds = parseIds($('termMentionIds').value);
+        if (!date || !judge || !title || !description) return showError(els.termError, 'Bitte Datum, Überschrift, Beschreibung und führenden Richter ausfüllen.');
+        db.courtTerms.push({ id: 'term-' + Date.now(), date, judge, title, description, participants, mentionIds, createdBy: currentUser.username, status: rawTermStatus(date), judgment: null, createdAt: new Date().toISOString() });
+        save();
+        closeModal('termModal');
+        renderAll();
         switchTab('termine');
-        renderAll();
       }
 
-      function openRegistryModal() {
-        el.registryForm.reset();
-        hide(el.registryError);
-        updateRegistryPreview();
-        openModal(el.registryModal);
+      function openTermDetail(id) {
+        const term = db.courtTerms.find(t => t.id === id);
+        if (!term) return;
+        selectedTermId = id;
+        const status = termStatus(term);
+        els.termDetailContent.innerHTML = `<div class="detail-block card"><h4>${esc(term.title)}</h4><p><b>Datum:</b> ${formatDate(term.date)}\n<b>Status:</b> ${status === 'open' ? 'Offen' : 'Geschlossen'}\n<b>Führender Richter:</b> ${esc(term.judge)}\n<b>Erstellt von:</b> ${esc(term.createdBy)}</p></div><div class="detail-block card"><h4>Beschreibung</h4><p>${esc(term.description)}</p></div><div class="detail-block card"><h4>Mitglieder</h4><p>${esc(term.participants || 'Keine Angaben')}</p></div><div class="detail-block card"><h4>Discord Erwähnungen</h4><p>${esc((term.mentionIds || []).join(', ') || 'Keine IDs')}</p></div>${term.judgment ? `<div class="detail-block card"><h4>Gerichtsurteil</h4><p>${esc(term.judgment.preview)}</p></div>` : ''}`;
+        $('announceJudgmentButton').textContent = term.judgment ? 'Gerichtsurteil bearbeiten' : 'Gerichtsurteil verkünden';
+        $('closeSelectedTermButton').style.display = status === 'closed' ? 'none' : '';
+        openModal('termDetailModal');
       }
 
-      function applyRegistryTemplate() {
-        const template = registryTemplates.find((item) => item.key === el.registryTemplate.value);
-        if (!template) return;
-        $('registryTitle').value = template.title;
-        $('registryBody').value = template.body;
-        updateRegistryPreview();
-      }
-
-      function saveRegistry(event) {
-        event.preventDefault();
-
-        const caseNumber = value('registryCaseNumber');
-        const procedure = value('registryProcedure');
-        const title = value('registryTitle');
-        const docsLink = value('registryDocsLink');
-        const body = value('registryBody');
-
-        if (!caseNumber || !procedure || !title || !body) {
-          showText(el.registryError, 'Bitte Aktenzeichen, Verfahren, Titel und Inhalt ausfüllen.');
-          return;
+      function openJudgment() {
+        const term = db.courtTerms.find(t => t.id === selectedTermId);
+        if (!term) return;
+        els.judgmentForm.reset();
+        $('judgmentDecisionBy').value = term.judge || '';
+        $('judgmentTitle').value = term.title || '';
+        if (term.judgment) {
+          $('judgmentCaseNumber').value = term.judgment.caseNumber || '';
+          $('judgmentFacts').value = term.judgment.facts || '';
+          $('judgmentConclusion').value = term.judgment.conclusion || '';
+          $('judgmentDecisionBy').value = term.judgment.decisionBy || term.judge || '';
+          $('judgmentDocsLink').value = term.judgment.docsLink || '';
+          $('judgmentTitle').value = term.judgment.title || term.title || '';
         }
+        updateJudgmentPreview();
+        openModal('judgmentModal');
+      }
 
-        const preview = buildRegistryText({ caseNumber, procedure, title, docsLink, body });
-
-        db.registries.unshift({
-          id: `registry-${Date.now()}`,
-          caseNumber,
-          procedure,
-          title,
-          docsLink,
-          body,
-          preview,
-          createdBy: currentUser ? currentUser.username : 'system',
-          createdAt: new Date().toISOString()
-        });
-
-        saveData();
-        el.registryForm.reset();
-        hide(el.registryError);
-        closeModal(el.registryModal);
-        switchTab('registraturen');
+      function saveJudgment(e) {
+        e.preventDefault();
+        const term = db.courtTerms.find(t => t.id === selectedTermId);
+        if (!term) return;
+        const data = {
+          caseNumber: $('judgmentCaseNumber').value.trim(),
+          title: $('judgmentTitle').value.trim(),
+          facts: $('judgmentFacts').value.trim(),
+          conclusion: $('judgmentConclusion').value.trim(),
+          decisionBy: $('judgmentDecisionBy').value.trim(),
+          docsLink: $('judgmentDocsLink').value.trim()
+        };
+        data.preview = judgmentText(term, data);
+        term.judgment = { ...data, createdAt: new Date().toISOString(), createdBy: currentUser.username };
+        term.status = 'closed';
+        save();
+        if (db.webhooks.gerichtsurteile) sendWebhookSafe(db.webhooks.gerichtsurteile, mentionText(term.mentionIds) + data.preview, data.title || term.title);
+        closeModal('judgmentModal');
+        closeModal('termDetailModal');
         renderAll();
+        openTermDetail(term.id);
+      }
+
+      function closeSelectedTerm() {
+        const term = db.courtTerms.find(t => t.id === selectedTermId);
+        if (!term) return;
+        term.status = 'closed';
+        save();
+        renderAll();
+        openTermDetail(term.id);
+      }
+
+      function updateJudgmentPreview() {
+        const term = db.courtTerms.find(t => t.id === selectedTermId) || { title: '', judge: '' };
+        els.judgmentPreview.textContent = judgmentText(term, {
+          caseNumber: $('judgmentCaseNumber').value.trim(),
+          title: $('judgmentTitle').value.trim(),
+          facts: $('judgmentFacts').value.trim(),
+          conclusion: $('judgmentConclusion').value.trim(),
+          decisionBy: $('judgmentDecisionBy').value.trim(),
+          docsLink: $('judgmentDocsLink').value.trim()
+        });
+      }
+
+      function openRegistry() {
+        if (!currentUser || !perm().canWriteRegistries) return;
+        selectedRegistryId = null;
+        els.registryForm.reset();
+        updateRegistryPreview();
+        openModal('registryModal');
+      }
+
+      function applyTemplate() {
+        const tpl = templates.find(t => t.key === $('registryTemplate').value);
+        if (!tpl) return;
+        $('registryTitle').value = tpl.title;
+        $('registryBody').value = tpl.body;
+        updateRegistryPreview();
+      }
+
+      function saveRegistry(e) {
+        e.preventDefault();
+        if (!currentUser || !perm().canWriteRegistries) return;
+        const caseNumber = $('registryCaseNumber').value.trim();
+        const procedure = $('registryProcedure').value.trim();
+        const title = $('registryTitle').value.trim();
+        const body = $('registryBody').value.trim();
+        const docsLink = $('registryDocsLink').value.trim();
+        const mentionIds = parseIds($('registryMentionIds').value);
+        if (!caseNumber || !procedure || !title || !body) return showError(els.registryError, 'Bitte Aktenzeichen, Verfahren, Titel und Inhalt ausfüllen.');
+        const preview = registryText({ caseNumber, procedure, title, body, docsLink });
+        if (selectedRegistryId) {
+          const item = db.registries.find(r => r.id === selectedRegistryId);
+          if (item) Object.assign(item, { caseNumber, procedure, title, body, docsLink, mentionIds, preview, updatedAt: new Date().toISOString() });
+        } else {
+          db.registries.unshift({ id: 'registry-' + Date.now(), caseNumber, procedure, title, body, docsLink, mentionIds, preview, createdBy: currentUser.username, createdAt: new Date().toISOString() });
+        }
+        save();
+        if (db.webhooks.registraturen) sendWebhookSafe(db.webhooks.registraturen, mentionText(mentionIds) + preview, title);
+        closeModal('registryModal');
+        renderAll();
+        switchTab('registraturen');
+      }
+
+      function editRegistry() {
+        const item = db.registries.find(r => r.id === selectedRegistryId);
+        if (!item) return;
+        $('registryCaseNumber').value = item.caseNumber;
+        $('registryProcedure').value = item.procedure;
+        $('registryTitle').value = item.title;
+        $('registryBody').value = item.body;
+        $('registryDocsLink').value = item.docsLink || '';
+        $('registryMentionIds').value = (item.mentionIds || []).join(', ');
+        updateRegistryPreview();
+        closeModal('registryDetailModal');
+        openModal('registryModal');
       }
 
       function updateRegistryPreview() {
-        const text = buildRegistryText({
-          caseNumber: value('registryCaseNumber') || 'Aktenzeichen',
-          procedure: value('registryProcedure') || 'Verfahren',
-          title: value('registryTitle') || 'Titel',
-          docsLink: value('registryDocsLink'),
-          body: value('registryBody') || 'Inhalt'
+        const mentions = mentionText(parseIds($('registryMentionIds').value));
+        els.registryPreview.textContent = mentions + registryText({
+          caseNumber: $('registryCaseNumber').value.trim() || 'Aktenzeichen',
+          procedure: $('registryProcedure').value.trim() || 'Verfahren',
+          title: $('registryTitle').value.trim() || 'Titel',
+          body: $('registryBody').value.trim() || 'Inhalt',
+          docsLink: $('registryDocsLink').value.trim()
         });
-        el.registryPreview.textContent = text;
       }
 
-      function openMemberDetail(memberId) {
-        const member = db.members.find((item) => item.id === memberId);
-        if (!member) return;
-
-        el.detailTitle.textContent = 'Mitglied';
-        el.detailContent.innerHTML = `
-          <div class="detail-block">
-            <h4>${escapeHtml(member.name)}</h4>
-            <p><b>Rang:</b> ${escapeHtml(member.rankLevel)} | ${escapeHtml(member.rankTitle)}
-<b>Status:</b> ${escapeHtml(member.status)}
-<b>Discord:</b> ${escapeHtml(member.discordName)}
-<b>Discord ID:</b> ${escapeHtml(member.discordId)}
-<b>Login:</b> ${escapeHtml(member.loginUsername)}</p>
-          </div>
-          <div class="detail-block">
-            <h4>Warnungen</h4>
-            <p>${Array.isArray(member.warnings) ? member.warnings.length : 0}/3</p>
-          </div>
-        `;
-        openModal(el.detailModal);
-      }
-
-      function openTermDetail(termId) {
-        const term = db.courtTerms.find((item) => item.id === termId);
-        if (!term) return;
-
-        el.detailTitle.textContent = 'Gerichtstermin';
-        el.detailContent.innerHTML = `
-          <div class="detail-block">
-            <h4>${escapeHtml(term.title)}</h4>
-            <p><b>Datum:</b> ${escapeHtml(formatDate(term.date))}
-<b>Status:</b> ${getTermStatus(term) === 'open' ? 'Offen' : 'Geschlossen'}
-<b>Richter:</b> ${escapeHtml(term.judge)}
-<b>Erstellt von:</b> ${escapeHtml(term.createdBy)}</p>
-          </div>
-          <div class="detail-block">
-            <h4>Beschreibung</h4>
-            <p>${escapeHtml(term.description)}</p>
-          </div>
-          <div class="detail-block">
-            <h4>Mitglieder</h4>
-            <p>${escapeHtml(term.participants || 'Keine Angaben')}</p>
-          </div>
-        `;
-        openModal(el.detailModal);
-      }
-
-      function openRegistryDetail(registryId) {
-        const item = db.registries.find((entry) => entry.id === registryId);
+      function openRegistryDetail(id) {
+        const item = db.registries.find(r => r.id === id);
         if (!item) return;
-
-        el.detailTitle.textContent = 'Registratur';
-        el.detailContent.innerHTML = `
-          <div class="detail-block">
-            <h4>${escapeHtml(item.title)}</h4>
-            <p><b>Aktenzeichen:</b> ${escapeHtml(item.caseNumber)}
-<b>Verfahren:</b> ${escapeHtml(item.procedure)}
-<b>Erstellt von:</b> ${escapeHtml(item.createdBy)}</p>
-          </div>
-          <div class="detail-block">
-            <h4>Inhalt</h4>
-            <p>${escapeHtml(item.preview)}</p>
-          </div>
-        `;
-        openModal(el.detailModal);
+        selectedRegistryId = id;
+        els.registryDetailContent.innerHTML = `<div class="detail-block card"><h4>${esc(item.title)}</h4><p><b>Aktenzeichen:</b> ${esc(item.caseNumber)}\n<b>Verfahren:</b> ${esc(item.procedure)}\n<b>Erstellt von:</b> ${esc(item.createdBy)}</p></div><div class="detail-block card"><h4>Discord Erwähnungen</h4><p>${esc((item.mentionIds || []).join(', ') || 'Keine IDs')}</p></div><div class="detail-block card"><h4>Inhalt</h4><p>${esc(item.preview)}</p></div>`;
+        openModal('registryDetailModal');
       }
 
-      function buildRegistryText(values) {
-        const lines = [
-          'DEPARTMENT OF JUSTICE',
-          'SENORA CITY',
-          '',
-          String(values.title || 'Titel').toUpperCase(),
-          '',
-          `Aktenzeichen: ${values.caseNumber || 'Aktenzeichen'}`,
-          `Verfahren: ${values.procedure || 'Verfahren'}`,
-          '',
-          values.body || 'Inhalt'
-        ];
+      function openMemberDetail(id) {
+        const member = db.members.find(m => m.id === id);
+        if (!member) return;
+        selectedMemberId = id;
+        defaults(member);
+        const user = db.users.find(u => u.memberId === id) || { permissions: { canWriteTerms: false, canWriteRegistries: false } };
+        const rankOptions = db.ranks.map(r => `<option value="${esc(r.key)}" ${r.key === member.rankKey ? 'selected' : ''}>${esc(r.level)} | ${esc(r.title)}</option>`).join('');
+        const sanctions = (member.sanctions || []).length ? member.sanctions.map((s, i) => `<div class="judge-box" style="margin-bottom:10px;"><b>${esc(s.reason)}</b><br><span class="tiny">Bis: ${esc(s.until || 'Offen')}</span> <button class="btn" style="padding:6px 10px;margin-left:8px;" type="button" onclick="removeSanction('${esc(member.id)}', ${i})">Entfernen</button></div>`).join('') : '<div class="judge-box">Keine aktiven Sanktionen.</div>';
+        const privateBlock = isOwner() ? `<div class="field"><label for="memberPrivateNotes">Private Notizen</label><textarea id="memberPrivateNotes">${esc(member.privateNotes || '')}</textarea></div>` : '';
+        const permsBlock = isOwner() ? `<div class="section-split"><h4>Einstellungen des Users</h4><div class="row-actions"><label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(85,130,255,.12);border-radius:12px;"><input id="permWriteTerms" type="checkbox" ${user.permissions?.canWriteTerms ? 'checked' : ''} /> Gerichtstermine schreiben</label><label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(85,130,255,.12);border-radius:12px;"><input id="permWriteRegistries" type="checkbox" ${user.permissions?.canWriteRegistries ? 'checked' : ''} /> Registraturen schreiben</label></div></div>` : '';
+        const deleteBtn = isOwner() && member.id !== 'owner-root' ? `<button class="btn danger" type="button" onclick="deleteSelectedMember()">Löschen</button>` : '';
+        els.memberDetailContent.innerHTML = `<div class="profile-grid"><div class="profile-box card"><div class="profile-label">Name</div><div class="profile-value">${esc(member.name)}</div></div><div class="profile-box card"><div class="profile-label">Rang</div><div class="profile-value">${esc(member.rankLevel)} | ${esc(member.rankTitle)}</div></div><div class="profile-box card"><div class="profile-label">Discord</div><div class="profile-value">${esc(member.discordName)}</div></div><div class="profile-box card"><div class="profile-label">Discord ID</div><div class="profile-value">${esc(member.discordId)}</div></div><div class="profile-box card"><div class="profile-label">Status</div><div class="profile-value">${esc(member.status)}</div></div><div class="profile-box card"><div class="profile-label">Warnungen</div><div class="profile-value">${(member.warnings || []).length}/3</div></div></div><div class="section-split"><h4>Abmeldung</h4><div class="row-actions"><button class="btn" type="button" onclick="setMemberStatus('AKTIV')">Aktiv setzen</button><button class="btn warn" type="button" onclick="setMemberStatus('ABGEMELDET')">Abmelden</button></div></div><div class="section-split"><h4>Warnungen</h4><div class="row-actions"><span class="tag green">Warnungen: ${(member.warnings || []).length}/3</span><button class="btn" type="button" onclick="addWarning()">+ Warnung</button><button class="btn" type="button" onclick="clearWarnings()">Warnungen löschen</button></div></div><div class="section-split"><h4>Sanktionen</h4>${sanctions}<div class="grid-2" style="margin-top:12px;"><div class="field"><label for="sanctionReason">Grund</label><input id="sanctionReason" type="text" /></div><div class="field"><label for="sanctionUntil">Bis</label><input id="sanctionUntil" type="text" /></div></div><div class="row-actions"><button class="btn" type="button" onclick="addSanction()">+ Sanktion hinzufügen</button></div></div><div class="section-split"><h4>Notizen</h4><div class="grid-2"><div class="field"><label for="memberPublicNotes">Öffentliche Notizen</label><textarea id="memberPublicNotes">${esc(member.publicNotes || '')}</textarea></div>${privateBlock}</div></div>${permsBlock}<div class="section-split"><h4>Rang ändern</h4><div class="grid-2"><div class="field"><label for="memberRankChange">Neuer Rang</label><select id="memberRankChange">${rankOptions}</select></div><div class="field"><label for="memberNotes">Notizen intern</label><textarea id="memberNotes">${esc(member.notes || '')}</textarea></div></div></div><div class="detail-actions">${deleteBtn}<button class="btn primary" type="button" onclick="saveMemberChanges()">Speichern</button></div>`;
+        openModal('memberDetailModal');
+      }
 
-        if (values.docsLink) {
-          lines.push('', `Google Docs: ${values.docsLink}`);
+      function addWarning() {
+        const m = member();
+        if (!m) return;
+        defaults(m);
+        if (m.warnings.length >= 3) return;
+        m.warnings.push({ createdAt: new Date().toISOString(), by: currentUser.username });
+        save();
+        renderAll();
+        openMemberDetail(m.id);
+      }
+
+      function clearWarnings() {
+        const m = member();
+        if (!m) return;
+        m.warnings = [];
+        save();
+        renderAll();
+        openMemberDetail(m.id);
+      }
+
+      function addSanction() {
+        const m = member();
+        if (!m) return;
+        const reason = ($('sanctionReason')?.value || '').trim();
+        const until = ($('sanctionUntil')?.value || '').trim();
+        if (!reason) return;
+        defaults(m);
+        m.sanctions.push({ reason, until, createdAt: new Date().toISOString() });
+        save();
+        renderAll();
+        openMemberDetail(m.id);
+      }
+
+      function removeSanction(memberId, index) {
+        const m = db.members.find(x => x.id === memberId);
+        if (!m) return;
+        defaults(m);
+        m.sanctions.splice(index, 1);
+        save();
+        renderAll();
+        openMemberDetail(m.id);
+      }
+
+      function setMemberStatus(status) {
+        const m = member();
+        if (!m) return;
+        m.status = status;
+        save();
+        renderAll();
+        openMemberDetail(m.id);
+      }
+
+      function saveMemberChanges() {
+        const m = member();
+        if (!m) return;
+        const rank = db.ranks.find(r => r.key === $('memberRankChange').value);
+        if (rank) {
+          m.rankKey = rank.key;
+          m.rankLevel = rank.level;
+          m.rankTitle = rank.title;
         }
+        m.notes = $('memberNotes').value || '';
+        m.publicNotes = $('memberPublicNotes').value || '';
+        if (isOwner() && $('memberPrivateNotes')) m.privateNotes = $('memberPrivateNotes').value || '';
+        const u = db.users.find(x => x.memberId === m.id);
+        if (u && isOwner()) {
+          u.permissions = {
+            canWriteTerms: !!$('permWriteTerms')?.checked,
+            canWriteRegistries: !!$('permWriteRegistries')?.checked
+          };
+          if (currentUser && u.username === currentUser.username) currentUser = u;
+        }
+        save();
+        renderAll();
+        openMemberDetail(m.id);
+      }
 
+      function deleteSelectedMember() {
+        const m = member();
+        if (!m || !isOwner() || m.id === 'owner-root') return;
+        db.members = db.members.filter(x => x.id !== m.id);
+        db.users = db.users.filter(x => x.memberId !== m.id);
+        save();
+        closeModal('memberDetailModal');
+        renderAll();
+      }
+
+      function judgmentText(term, v) {
+        const title = v.title || term.title || 'Unbenanntes Verfahren';
+        const decisionBy = v.decisionBy || term.judge || 'Nicht angegeben';
+        const lines = ['DEPARTMENT OF JUSTICE','SENORA CITY','','IM NAMEN DES VOLKES','','URTEIL','','In dem Strafverfahren gegen ' + title,''];
+        if (v.caseNumber) lines.push('AKTENZEICHEN: ' + v.caseNumber, '');
+        if (v.facts) lines.push('SACHVERHALT', v.facts, '');
+        if (v.conclusion) lines.push('ENTSCHEIDUNG', v.conclusion, '');
+        lines.push('VERKÜNDET DURCH: ' + decisionBy, '');
+        if (v.docsLink) lines.push('DOKUMENT LINK', v.docsLink, '');
+        lines.push('──────────────', 'Department of Justice • Senora City');
+        return lines.join('\n').trim();
+      }
+
+      function registryText(v) {
+        const lines = ['DEPARTMENT OF JUSTICE','SENORA CITY','',(v.title || 'Titel').toUpperCase(),'','Aktenzeichen: ' + (v.caseNumber || 'Aktenzeichen'),'Verfahren: ' + (v.procedure || 'Verfahren'),'',v.body || 'Inhalt'];
+        if (v.docsLink) lines.push('', 'Google Docs: ' + v.docsLink);
         lines.push('', '──────────────', 'Department of Justice • Senora City');
         return lines.join('\n').trim();
       }
 
-      function switchTab(tabName) {
-        document.querySelectorAll('.tab-btn[data-tab]').forEach((btn) => {
-          btn.classList.toggle('active', btn.dataset.tab === tabName);
-        });
-
-        document.querySelectorAll('.section-view').forEach((view) => {
-          view.classList.remove('active');
-        });
-
-        const target = $(`view-${tabName}`);
-        if (target) target.classList.add('active');
+      function sendWebhookSafe(url, content, title) {
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: 'Senora City DOJ', embeds: [{ title: title || 'Eintrag', description: content, color: 3447003 }] })
+        }).catch(() => {});
       }
 
-      function setTermFilter(filter) {
-        currentTermFilter = filter;
-        el.filterOpenBtn.classList.toggle('primary', filter === 'open');
-        el.filterClosedBtn.classList.toggle('primary', filter === 'closed');
-        el.filterAllBtn.classList.toggle('primary', filter === 'all');
-        renderTerms();
+      function switchTab(name) {
+        document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === name));
+        document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+        $('view-' + name).classList.add('active');
       }
 
-      function autoCloseExpiredTerms() {
+      function autoCloseTerms() {
         let changed = false;
-        db.courtTerms.forEach((term) => {
-          if (getStatusByDate(term.date) === 'closed' && term.status !== 'closed') {
-            term.status = 'closed';
+        db.courtTerms.forEach(t => {
+          if (rawTermStatus(t.date) === 'closed' && t.status !== 'closed') {
+            t.status = 'closed';
             changed = true;
           }
         });
-        if (changed) saveData();
+        if (changed) save();
       }
 
-      function getTermStatus(term) {
-        return term.status === 'closed' ? 'closed' : getStatusByDate(term.date);
+      function termStatus(t) { return t.status === 'closed' ? 'closed' : rawTermStatus(t.date); }
+      function rawTermStatus(date) {
+        const n = new Date();
+        const today = new Date(n.getFullYear(), n.getMonth(), n.getDate()).toISOString().slice(0,10);
+        return date < today ? 'closed' : 'open';
       }
+      function parseIds(raw) { return String(raw || '').split(/[\n,; ]+/).map(x => x.trim()).filter(x => /^\d{5,}$/.test(x)); }
+      function mentionText(ids) { return ids && ids.length ? ids.map(id => `<@${id}>`).join(' ') + '\n\n' : ''; }
 
-      function getStatusByDate(dateString) {
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString().slice(0, 10);
-        return String(dateString) < today ? 'closed' : 'open';
-      }
-
-      function loadData() {
+      function load() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           if (!raw) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
-            return clone(defaultData);
+            return JSON.parse(JSON.stringify(defaultData));
           }
-
           const parsed = JSON.parse(raw);
-          if (!parsed || !Array.isArray(parsed.users) || !Array.isArray(parsed.members)) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
-            return clone(defaultData);
-          }
-
-          if (!Array.isArray(parsed.ranks)) parsed.ranks = clone(ranks);
-          if (!Array.isArray(parsed.courtTerms)) parsed.courtTerms = [];
-          if (!Array.isArray(parsed.registries)) parsed.registries = [];
-
-          parsed.members.forEach((member) => {
-            if (!Array.isArray(member.warnings)) member.warnings = [];
-            if (!Array.isArray(member.sanctions)) member.sanctions = [];
-            if (typeof member.publicNotes !== 'string') member.publicNotes = '';
-            if (typeof member.privateNotes !== 'string') member.privateNotes = '';
-          });
-
+          if (!parsed.users || !parsed.members || !parsed.ranks) throw new Error('bad data');
+          parsed.webhooks ||= { akten: '', registraturen: '', gerichtsurteile: '' };
+          parsed.courtTerms ||= [];
+          parsed.registries ||= [];
+          parsed.members = parsed.members.map(m => defaults(m));
+          parsed.users = parsed.users.map(u => ({ permissions: { canWriteTerms: u.role === 'owner', canWriteRegistries: u.role === 'owner' }, ...u }));
           return parsed;
-        } catch (error) {
+        } catch {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
-          return clone(defaultData);
+          return JSON.parse(JSON.stringify(defaultData));
         }
       }
 
-      function saveData() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-      }
-
-      function resetData() {
-        if (!isOwner()) return;
-        db = clone(defaultData);
-        saveData();
-        repairOwnerLogin();
-        renderAll();
-      }
-
-      function closeAllModals() {
-        [el.memberModal, el.termModal, el.registryModal, el.detailModal].forEach(closeModal);
-      }
-
-      function openModal(node) {
-        if (node) node.classList.remove('hidden');
-      }
-
-      function closeModal(node) {
-        if (node) node.classList.add('hidden');
-      }
-
-      function show(node) {
-        if (node) node.classList.remove('hidden');
-      }
-
-      function hide(node) {
-        if (node) node.classList.add('hidden');
-      }
-
-      function toggle(node, shouldShow) {
-        if (shouldShow) show(node);
-        else hide(node);
-      }
-
-      function showText(node, message) {
-        node.textContent = message;
-        show(node);
-      }
-
-      function isOwner() {
-        return currentUser && currentUser.role === 'owner';
-      }
-
-      function value(id) {
-        const node = $(id);
-        return node ? node.value.trim() : '';
-      }
-
-      function pad2(number) {
-        return String(number).padStart(2, '0');
-      }
-
-      function formatDate(dateString) {
-        const parts = String(dateString || '').split('-');
-        return parts.length === 3 ? `${parts[2]}.${parts[1]}.${parts[0]}` : dateString;
-      }
-
-      function clone(value) {
-        return JSON.parse(JSON.stringify(value));
-      }
-
-      function escapeHtml(value) {
-        return String(value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
+      function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); }
+      function defaults(m) { m.warnings ||= []; m.sanctions ||= []; m.notes ||= ''; m.publicNotes ||= ''; m.privateNotes ||= ''; return m; }
+      function perm() { if (!currentUser) return { canWriteTerms: false, canWriteRegistries: false }; if (currentUser.role === 'owner') return { canWriteTerms: true, canWriteRegistries: true }; return currentUser.permissions || { canWriteTerms: false, canWriteRegistries: false }; }
+      function member() { return db.members.find(m => m.id === selectedMemberId) || null; }
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function formatDate(s) { const p = String(s || '').split('-'); return p.length === 3 ? `${p[2]}.${p[1]}.${p[0]}` : s; }
+      function maskWebhook(s) { s = String(s || ''); return s.length <= 24 ? s : s.slice(0, 18) + '...' + s.slice(-6); }
+      function openModal(id) { $(id).classList.remove('hidden'); }
+      function closeModal(id) { $(id).classList.add('hidden'); }
+      function hideAllModals() { ['memberModal','memberDetailModal','settingsModal','termModal','termDetailModal','judgmentModal','registryModal','registryDetailModal'].forEach(closeModal); }
+      function show(el) { el.classList.remove('hidden'); }
+      function hide(el) { el.classList.add('hidden'); }
+      function showError(el, text) { el.textContent = text; show(el); }
+      function isOwner() { return currentUser?.role === 'owner'; }
+      function esc(v) { return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
     })();
   </script>
 </body>
